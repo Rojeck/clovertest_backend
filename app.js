@@ -11,7 +11,6 @@ const app = express();
 
 const listsRouter = require("./src/routers/lists");
 const cardRouter = require("./src/routers/card");
-const allowCors = require('./src/utils/allowCors');
 
 mongoose.set("strictQuery", false);
 mongoose.connect(DB_LINK);
@@ -20,10 +19,13 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://clovertest.vercel.app/", 'https://clovertest.onrender.com/'],
+    origin: [
+      "http://localhost:3000",
+      "https://clovertest.vercel.app/",
+      "https://clovertest.onrender.com/",
+    ],
   })
 );
-app.use(allowCors);
 
 app.use("/lists", listsRouter);
 app.use("/card", cardRouter);
